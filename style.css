@@ -1057,24 +1057,19 @@ button:hover {
     }
 
     /* 잊페스 취향표 (모바일)
-       - 표를 원래 비율로 유지하고, 표가 화면보다 넓으면 좌우로 스크롤한다.
-       - 맨 왼쪽 이름 칸(세로 헤더)과 왼쪽 위 모서리 칸은 스크롤해도 고정된다.
-       - 열 개수(--cols)는 script.js의 createTable()에서 넣어준다. */
+       - 6명이라 스크롤 없이 표 전체가 화면 폭에 딱 맞게 줄어든다.
+       - 이름 칸은 15%, 나머지 칸은 남은 폭을 똑같이 나눠 가진다. */
     .table-scroll {
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior-x: contain;
+        overflow: hidden;
     }
 
     table {
         --header-row-height: 40px;
-        --header-col-width: 64px;
-        --col-width: 54px;
+        --header-col-width: 15%;
         --row-h: 40px;
 
-        width: calc(var(--header-col-width) + var(--cols, 6) * var(--col-width));
-        min-width: 100%;
+        width: 100%;
+        min-width: 0;
         max-width: none;
     }
 
@@ -1101,18 +1096,9 @@ button:hover {
         filter: none;
     }
 
-    /* 왼쪽 이름 칸 고정: 헤더 칸은 불투명한 단색이라 뒤가 비치지 않는다 */
+    /* 스크롤이 없으니 왼쪽 이름 칸을 고정할 필요가 없다 */
     tr > :first-child {
-        position: sticky;
-        left: 0;
-        z-index: 3;
         width: var(--header-col-width);
-        box-shadow: 3px 0 5px -2px rgba(0, 0, 0, .18);
-    }
-
-    /* 왼쪽 위 모서리 칸 */
-    th.corner {
-        z-index: 4;
     }
 
     .table-nav {
